@@ -1,0 +1,85 @@
+﻿@model ChomasP3.Models.PeopleModel
+
+@{
+    ViewData["Title"] = Model.pageTitle;
+}
+
+<h1>@Model.title</h1>
+<h4>@Model.subTitle</h4>
+
+<h2>Faculty</h2>
+<section class="people">
+    @foreach (var person in Model.faculty)
+    {
+        <div class="personCard">
+            <img src="@person.imagePath" alt="Photo of @person.name" />
+            <h4>@person.name</h4>
+            <h6>@person.title</h6>
+            @if (person.username != null && person.username != "")
+            {
+                <p>@person.username</p>
+            }
+            <p>@person.office</p>
+            <p>@person.email</p>
+            <p>@person.phone</p>
+            @if (person.website != null && person.website != "")
+            {
+                <p><a href="@person.website">Website</a></p>
+            }
+            @if (person.tagline != null && person.tagline != "")
+            {
+                <p>@person.tagline</p>
+            }
+            @if (person.interestArea != null && person.interestArea != "")
+            {
+                <p>@person.interestArea</p>
+            }
+            @if (person.twitter != null && person.twitter != "")
+            {
+                <p>Twitter: @person.twitter</p>
+            }
+            @if (person.facebook != null && person.facebook != "")
+            {
+                <p>Facebook: @person.facebook</p>
+            }
+        </div>   
+    }
+</section>
+<section class="people">
+    <h2>Staff</h2>
+    @foreach (var person in Model.staff)
+    {
+        <div class="personCard">
+            <img src="@person.imagePath" alt="Photo of @person.name" />
+            <h4>@person.name</h4>
+            <h6>@person.title</h6>
+            @if (person.username != null)
+            {
+                <p>Username: @person.username</p>
+            }
+            <p>Office: @person.office</p>
+            <p>@person.email</p>
+            <p>@person.phone</p>
+            @if (person.website != null)
+            {
+                <p><a href="@person.website">Website</a></p>
+            })
+            @if (person.tagline != null)
+            {
+                <p>Tagline: @person.tagline</p>
+            })
+            @if (person.interestArea != null)
+            {
+                <p>Interest Area: @person.interestArea</p>
+            })
+            @if (person.twitter != null)
+            {
+                <p>Twitter: @person.twitter</p>
+            }
+            @if (person.facebook != null)
+            {
+                <p>Facebook: @person.facebook</p>
+            }
+        </div>
+    }
+</section>

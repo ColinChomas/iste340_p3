@@ -39,6 +39,21 @@ namespace ChomasP3.Controllers
             return View(rtnResults);
         }
 
+        public async Task<IActionResult> People()
+        {
+            // get the data
+            DataRetrieval dr = new();
+            // get the people
+            var loadedPeople = await dr.GetData("people/");
+
+            //Newtonsoft.Json 
+            var rtnResults = JsonConvert.DeserializeObject<PeopleModel>(loadedPeople);
+
+            rtnResults.pageTitle = "Our People";
+
+            return View(rtnResults);
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

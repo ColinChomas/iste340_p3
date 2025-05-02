@@ -41,6 +41,37 @@
                     return "Ex: " + msg;
                 }
             }
-        } 
+        }
+        public async Task<string> GetCourse(string courseId)
+        {
+            //using statement - at the end of it it automatically calls dispose method
+            using (var client = new HttpClient())
+            {
+                // setup
+                client.BaseAddress = new Uri("https://ischool.gccis.rit.edu/api/courseID=");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                // try/catch
+                try
+                {
+                    HttpResponseMessage res = await client.GetAsync(courseId, HttpCompletionOption.ResponseHeadersRead);
+                    res.EnsureSuccessStatusCode();
+                    // go get it!
+                    var data = await res.Content.ReadAsStringAsync();
+                    // at this point data is just a string...
+                    return data;
+                }
+                catch (HttpRequestException hre)
+                {
+                    var msg = hre.Message;
+                    return "HttpReq: " + msg;
+                }
+                catch (Exception ex)
+                {
+                    var msg = ex.Message;
+                    return "Ex: " + msg;
+                }
+            }
+        }
     }
 }

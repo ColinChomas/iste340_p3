@@ -1,0 +1,51 @@
+﻿@model ChomasP3.Models.MinorsModel
+@using Newtonsoft.Json
+@{
+    ViewData["Title"] = Model.pageTitle;
+}
+
+<h1>Our Undergraduate Minors</h1>
+
+<div id="minorAcc">
+    @foreach (var minor in Model.UgMinors)
+    {
+        <h3>@minor.name - @minor.title</h3>
+        <div style="align-items:center; text-align: center">
+            <p>@minor.description</p>
+            <ul style="align-content: center; list-style: none">
+                @foreach (var course in minor.courses)
+                {
+                    <li>
+                        @{
+                            // Fetch data from the API
+                            var httpClient = new HttpClient();
+                            var apiUrl = $"https://ischool.gccis.rit.edu/api/course/courseID={course}";
+                            var response = await httpClient.GetAsync(apiUrl);
+                            if (response.IsSuccessStatusCode)
+                            {
+                                var courseDataString = await response.Content.ReadAsStringAsync();
+
+                                // Deserialize the JSON string into a CourseModel object
+                                var courseData = JsonConvert.DeserializeObject<ChomasP3.Models.CourseModel>(courseDataString);
+
+                                // Display the fetched data
+                                if (courseData != null)
+                                {
+                                    <p title="@courseData.title: @courseData.description">@course</p>
+                                }
+                                else
+                                {
+                                    <p title="course info not found">@course</p>
+                                }
+                            }
+                            else
+                            {
+                                <p title="course info not found">@course</p>
+                            }
+                        }
+                    </li>
+                }
+        </div>
+    }
+</div>
+

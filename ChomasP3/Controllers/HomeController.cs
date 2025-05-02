@@ -16,9 +16,16 @@ namespace ChomasP3.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            //get the data
+            DataRetrieval dr = new();
+
+            var loadedStats = await dr.GetData("employment/");
+
+            var rtnResults = JsonConvert.DeserializeObject<EmploymentModel>(loadedStats);
+
+            return View(rtnResults);
         }
 
         public async Task<IActionResult> About()
@@ -53,6 +60,48 @@ namespace ChomasP3.Controllers
 
             return View(rtnResults);
         }
+
+        public async Task<IActionResult> Degrees()
+        {
+            // get the data
+            DataRetrieval dr = new();
+            // get the people
+            var loadedDegrees = await dr.GetData("degrees/");
+            //Newtonsoft.Json 
+            var rtnResults = JsonConvert.DeserializeObject<DegreesModel>(loadedDegrees);
+            rtnResults.pageTitle = "Our Degrees";
+            return View(rtnResults);
+        }
+
+        public async Task<IActionResult> Minors()
+        {
+            DataRetrieval dr = new();
+
+            // Fetch data for minors
+            var loadedMinors = await dr.GetData("minors/");
+            var minors = JsonConvert.DeserializeObject<MinorsModel>(loadedMinors);
+
+            // Log the data for debugging
+            _logger.LogInformation("Minors Data: {Minors}", JsonConvert.SerializeObject(minors));
+
+            minors.pageTitle = "Our Minors";
+
+            return View(minors);
+        }
+
+        public async Task<IActionResult> Courses(string courseId)
+        {
+            // get the data
+            DataRetrieval dr = new();
+            // get the people
+            var loadedCourses = await dr.GetCourse(courseId);
+            //Newtonsoft.Json 
+            var rtnResults = JsonConvert.DeserializeObject<CourseModel>(loadedCourses);
+            
+            return View(rtnResults);
+        }
+
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

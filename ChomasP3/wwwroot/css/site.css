@@ -44,3 +44,11 @@ body {
 .personCard img {
     height: 100px
 }
+
+.ui-tooltip {
+    padding: 10px;
+    color: black;
+    border: solid 1px black;
+    border-radius: 2px;
+    background-color: white;
+}

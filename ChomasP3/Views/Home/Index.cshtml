@@ -4,6 +4,8 @@
     ViewData["Title"] = "Home Page";
 }
 
+
+
 <div class="text-center">
 
     <h1 class="display-5">Welcome to the RIT iSchool Webpage!</h1>
@@ -27,24 +29,23 @@
         }
     </div>
     <hr />
-    <div>
+    <div class="listcontainer">
         <h3>@Model.employers.title</h3>
+        <ul>
         @foreach(var employer in Model.employers.employerNames)
         {
-            <ul>
                 <li>@employer</li>
-            </ul>
         }
+        </ul>
     </div>
-    <hr />
-    <div>
+    <div class="listcontainer">
         <h3>@Model.careers.title</h3>
+        <ul>
         @foreach(var career in Model.careers.careerNames)
         {
-            <ul>
                 <li>@career</li>
-            </ul>
         }
+        </ul>
     </div>
     <hr />
     <div>
@@ -71,20 +72,32 @@
             </tbody>
         </table>
     </div>
-    <hr />
     <div>
         <h3>@Model.employmentTable.title</h3>
-        @foreach (var employer in Model.employmentTable.professionalEmploymentInformation)
-        {
-            <div>
-                <ul>
-                    <li>@employer.employer</li>
-                    <li>@employer.degree</li>
-                    <li>@employer.city</li>
-                    <li>@employer.title</li>
-                    <li>@employer.startDate</li>
-                </ul>
-            </div>
-        }
+        <table id="empTable" class="display">
+            <thead>
+                <tr>
+                    <th>Employer</th>
+                    <th>Degree</th>
+                    <th>City</th>
+                    <th>Title</th>
+                    <th>Start Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var employer in Model.employmentTable.professionalEmploymentInformation)
+                {
+                    <tr>
+
+                        <td>@employer.employer</td>
+                        <td>@employer.degree</td>
+                        <td>@employer.city</td>
+                        <td>@employer.title</td>
+                        <td>@employer.startDate</td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </div>

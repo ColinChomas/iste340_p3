@@ -28,17 +28,17 @@ body {
     text-align: center;
 }
 
-.people{
-    display:flex;
-    flex-wrap: wrap;
-}
-
 .personCard{
     width: 200px;
     margin: 10px;
     border: solid grey 2px;
     border-radius: 5px;
     padding: 15px;
+}
+
+#pepTab div {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .personCard img {
@@ -51,4 +51,20 @@ body {
     border: solid 1px black;
     border-radius: 2px;
     background-color: white;
+}
+
+.listcontainer ul {
+    list-style:none;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.listcontainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal {
+    display: none;
 }

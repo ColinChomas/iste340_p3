@@ -4,8 +4,19 @@
     ViewData["Title"] = Model.pageTitle;
 }
 
+
+
 <h1>@Model.title</h1>
 <h4>@Model.subTitle</h4>
+
+<!-- Modal HTML embedded directly into document -->
+<div id="ex1" class="modal">
+    <p>Thanks for clicking. That felt good.</p>
+    <a href="#" rel="modal:close">Close</a>
+</div>
+
+<!-- Link to open the modal -->
+<p><a href="#ex1" rel="modal:open">Open Modal</a></p>
 
 <div id="allPeople" style="display:none">
 
@@ -17,37 +28,43 @@
         <div id="fac">
             @foreach (var person in Model.faculty)
             {
+
+                    <div id="@person.username" class="modal" style="display:none">
+                        <h6>@person.title</h6>
+                        @if (person.username != null && person.username != "")
+                        {
+                            <p>@person.username</p>
+                        }
+                        <p>@person.office</p>
+                        <p>@person.email</p>
+                        <p>@person.phone</p>
+                        @if (person.website != null && person.website != "")
+                        {
+                            <p><a href="@person.website">Website</a></p>
+                        }
+                        @if (person.tagline != null && person.tagline != "")
+                        {
+                            <p>@person.tagline</p>
+                        }
+                        @if (person.interestArea != null && person.interestArea != "")
+                        {
+                            <p>@person.interestArea</p>
+                        }
+                        @if (person.twitter != null && person.twitter != "")
+                        {
+                            <p>Twitter: @person.twitter</p>
+                        }
+                        @if (person.facebook != null && person.facebook != "")
+                        {
+                            <p>Facebook: @person.facebook</p>
+                        }
+                        <a href="#" rel="modal:close">Close</a>
+                    </div>
+
                 <div class="personCard">
                     <img src="@person.imagePath" alt="Photo of @person.name" />
                     <h4>@person.name</h4>
-                    <h6>@person.title</h6>
-                    @if (person.username != null && person.username != "")
-                    {
-                        <p>@person.username</p>
-                    }
-                    <p>@person.office</p>
-                    <p>@person.email</p>
-                    <p>@person.phone</p>
-                    @if (person.website != null && person.website != "")
-                    {
-                        <p><a href="@person.website">Website</a></p>
-                    }
-                    @if (person.tagline != null && person.tagline != "")
-                    {
-                        <p>@person.tagline</p>
-                    }
-                    @if (person.interestArea != null && person.interestArea != "")
-                    {
-                        <p>@person.interestArea</p>
-                    }
-                    @if (person.twitter != null && person.twitter != "")
-                    {
-                        <p>Twitter: @person.twitter</p>
-                    }
-                    @if (person.facebook != null && person.facebook != "")
-                    {
-                        <p>Facebook: @person.facebook</p>
-                    }
+                    <p><a href="#@person.username" rel="modal:open">More</a></p>
                 </div>
             }
 
@@ -93,3 +110,7 @@
         </div>
     </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />

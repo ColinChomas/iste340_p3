@@ -3,6 +3,26 @@
 
 // Initialize tabs and accordions
 $(function () {
+    console.log("testing");
+
+    //index
+    console.log("pretable");
+    try {
+        let table = $('#coopTable').DataTable();
+        let t2 = $('#empTable').DataTable();
+        console.log("DataTable initialized successfully");
+    } catch (e) {
+        console.error("DataTable initialization error:", e);
+    }
+    console.log("postTable");
+
+    console.log("jquery modal test")
+    if ($.fn.modal) {
+        console.log("jQuery Modal is loaded.");
+    } else {
+        console.error("jQuery Modal is NOT loaded.");
+    } 
+
     // People page
     $("#pepTab").tabs();
     $('#allPeople').fadeIn(500);
@@ -16,6 +36,7 @@ $(function () {
         active: false,
         heightStyle: "content"
     });
+
 
     $(document).tooltip({
         position: {
@@ -32,10 +53,4 @@ $(function () {
         }
     });
 
-    try {
-        let table = $('#coopTable').DataTable();
-        console.log("DataTable initialized successfully");
-    } catch (e) {
-        console.error("DataTable initialization error:", e);
-    }
 });
